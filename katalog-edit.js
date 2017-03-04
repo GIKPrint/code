@@ -1,5 +1,4 @@
 function showrecentpostswiththumbs(json){
-	document.write('<ul class="recent_posts_with_thumbs">');
 	for(var i=0;i<numposts;i++){
 		var entry=json.feed.entry[i];
 		var posttitle=entry.title.$t;
@@ -16,6 +15,8 @@ function showrecentpostswiththumbs(json){
 	var thumburl;
 	try{
 		thumburl=entry.media$thumbnail.url;
+		thumburl = thumburl.replace("/s72-c/","/s139-c/");
+		
 		}catch(error){
 			s=entry.content.$t;
 			a=s.indexOf("<img");
@@ -45,7 +46,7 @@ monthnames[10]="Oct";
 monthnames[11]="Nov";
 monthnames[12]="Dec";
 if(showpostthumbnails==true)
-document.write('<a href="'+posturl+'" target ="_top"><img class="recent_thumb" src="'+thumburl+'"/></a>');
+document.write('<a href="'+posturl+'" target ="_blank"><img class="recent_thumb" src="'+thumburl+'" alt="'+posttitle+'" title="'+posttitle+'"/></a>');
 if("content"in entry){
 	var postcontent=entry.content.$t;
 	}else if("summary"in entry){
@@ -58,7 +59,7 @@ if("content"in entry){
 		else{}}
 var towrite='';
 var flag=0;
-document.write('<br><strong>');
+document.write('<strong>');
 if(showpostdate==true){
 	towrite=towrite+monthnames[parseInt(cdmonth,10)]+'-'+cdday+' - '+cdyear;flag=1;
 	}
@@ -77,7 +78,7 @@ if(displaymore==true){
 	flag=1;;}
 document.write(towrite);document.write('</strong>');if(displayseparator==true)
 if(i!=(numposts-1))
-document.write('<hr size=0.5>');
+document.write('<hr class="style14">');
 }
-document.write('</ul>');
+
 }
